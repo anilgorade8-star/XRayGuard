@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OsteoCheck AI — Intelligent Bone Health Screening</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand" onclick="showPage('home')">
+            <div class="brand-icon">🦴</div>
+            <span class="brand-text">Osteo<span>Check</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
+            <a href="#" class="nav-link" onclick="showPage('upload')">Analyze</a>
+            <a href="#" class="nav-link">Technology</a>
+            <a href="#" class="nav-link">About</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">🌓</button>
+            <div class="profile-container">
+                <button class="profile-toggle" id="profileToggle" style="overflow: hidden; padding: 0;">
+                    <img id="navProfilePhoto" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                    <span id="navProfilePlaceholder">👤</span>
+                </button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header" id="dropdownUserName">Account</div>
+                    <a href="#" class="dropdown-item" onclick="showPage('profile')">
+                        <span>👤</span> My Profile
+                    </a>
+                    <a href="#" class="dropdown-item" onclick="showPage('settings')">
+                        <span>⚙️</span> Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" onclick="alert('Logged out')">
+                        <span>🚪</span> Logout
+                    </a>
+                </div>
+            </div>
+            <button class="nav-cta" onclick="showPage('upload')">Start Analysis</button>
+        </div>
+    </nav>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="scanner-animation">
+            <div class="scanner-ring"></div>
+            <div class="scanner-ring"></div>
+            <div class="scanner-ring"></div>
+            <div class="scanner-center">🩻</div>
+        </div>
+        <div class="loading-text">
+            <h3 class="loading-title">Analyzing X-Ray</h3>
+            <p class="loading-subtitle" id="loadingStep">Initializing AI model...</p>
+            <div class="loading-progress">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Home Page -->
+        <div class="page active" id="homePage">
+            <section class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-badge">AI-Powered Healthcare</div>
+                    <h1 class="hero-title">
+                        AI-Based <span class="highlight">Osteoporosis Screening</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Advanced deep learning algorithms analyze routine X-ray radiographs to detect bone density
+                        abnormalities in seconds. Early detection leads to better outcomes.
+                    </p>
+                    <button class="hero-cta" onclick="showPage('upload')">
+                        <span>Upload X-ray</span>
+                        <span>→</span>
+                    </button>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">94%</span>
+                            <span class="hero-stat-label">Accuracy Rate</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">2.4s</span>
+                            <span class="hero-stat-label">Avg. Analysis Time</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">10k+</span>
+                            <span class="hero-stat-label">Scans Analyzed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card tertiary"></div>
+                    <div class="floating-card secondary"></div>
+                    <div class="floating-card main">
+                        <div class="card-header">
+                            <div class="card-title">Analysis Complete</div>
+                            <div class="card-subtitle">Left Femur X-Ray</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="scan-preview">
+                                <svg class="scan-image" viewBox="0 0 200 300" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <ellipse cx="100" cy="150" rx="40" ry="80" fill="#94a3b8" opacity="0.5" />
+                                    <ellipse cx="100" cy="150" rx="30" ry="60" fill="#64748b" opacity="0.3" />
+                                    <circle cx="85" cy="120" r="3" fill="#475569" />
+                                    <circle cx="115" cy="140" r="2" fill="#475569" />
+                                    <circle cx="90" cy="170" r="2" fill="#475569" />
+                                    <circle cx="110" cy="180" r="3" fill="#475569" />
+                                </svg>
+                                <div class="scan-overlay"></div>
+                            </div>
+                            <div class="result-indicator">
+                                <div class="indicator-dot"></div>
+                                <span class="indicator-text">Normal Bone Density</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="features-container">
+                    <div class="section-header-center">
+                        <span class="section-tag">Why Choose Us</span>
+                        <h2 class="section-title">Clinical-Grade AI Technology</h2>
+                        <p class="section-subtitle">Built with cutting-edge deep learning models trained on thousands of
+                            radiographs for precise bone health assessment.</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon-box">🧠</div>
+                            <h3 class="feature-title">Deep Learning AI</h3>
+                            <p class="feature-desc">EfficientNetB3 architecture with transfer learning for superior
+                                feature extraction from X-ray images.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-box">⚡</div>
+                            <h3 class="feature-title">Instant Results</h3>
+                            <p class="feature-desc">Get comprehensive risk assessment in under 3 seconds with confidence
+                                scores and visual explanations.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-box">🔍</div>
+                            <h3 class="feature-title">Explainable AI</h3>
+                            <p class="feature-desc">Grad-CAM heatmaps show exactly which regions influenced the AI's
+                                decision for clinical transparency.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="brand-icon" style="width: 32px; height: 32px; font-size: 16px;">🦴</div>
+                        <span>OsteoCheck</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Documentation</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2026 OsteoCheck AI. For research and educational purposes. Not intended as a substitute for
+                        professional medical advice.</p>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Upload Page -->
+        <div class="page" id="uploadPage">
+            <section class="upload-section">
+                <div class="page-header">
+                    <h1 class="page-title">Upload X-Ray Image</h1>
+                    <p class="page-subtitle">Drag and drop your radiograph or click to browse. We support JPEG, PNG, and
+                        DICOM formats.</p>
+                </div>
+                <div class="upload-container">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">📤</div>
+                            <div class="upload-text">
+                                <h3>Drop your X-ray here</h3>
+                                <p>or click to browse from your computer<br>Supports: JPG, PNG, DICOM (max 25MB)</p>
+                            </div>
+                        </div>
+                        <div class="upload-preview" id="uploadPreview">
+                            <img src="" alt="Preview" class="preview-image" id="previewImage">
+                            <button class="preview-remove" onclick="removeFile(event)">×</button>
+                        </div>
+                        <input type="file" id="fileInput" class="file-input" accept="image/*"
+                            onchange="handleFileSelect(event)">
+                    </div>
+                    <div class="upload-actions">
+                        <button class="btn btn-secondary" onclick="loadDemo()">Try Demo</button>
+                        <button class="btn btn-primary" id="analyzeBtn" onclick="startAnalysis()" disabled>
+                            <span>Analyze X-Ray</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Results Page -->
+        <div class="page" id="resultsPage">
+            <section class="results-section">
+                <div class="page-header">
+                    <span class="section-tag">Analysis Complete</span>
+                    <h1 class="page-title">Screening Results</h1>
+                    <p class="page-subtitle">AI-powered assessment of your X-ray with detailed risk breakdown and
+                        clinical recommendations.</p>
+                </div>
+                <div class="results-grid">
+                    <!-- Left Column: Risk Assessment -->
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <h3 class="result-card-title">Risk Assessment</h3>
+                            <span class="result-badge medium" id="riskBadge">Medium Risk</span>
+                        </div>
+                        <div class="result-card-body">
+                            <div class="circular-indicator">
+                                <div class="circular-bg">
+                                    <div class="circular-inner">
+                                        <span class="risk-percentage" id="riskPercentage">68%</span>
+                                        <span class="risk-label">Risk Score</span>
+                                    </div>
+                                </div>
+                                <div class="risk-marker" id="riskMarker"></div>
+                            </div>
+                            <div class="result-details">
+                                <div class="detail-item">
+                                    <div class="detail-icon">🩻</div>
+                                    <div class="detail-content">
+                                        <h4>AI Prediction</h4>
+                                        <p id="predictionText">Osteopenia Detected</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">📊</div>
+                                    <div class="detail-content">
+                                        <h4>Confidence Level</h4>
+                                        <p id="confidenceText">87.3% Confidence</p>
+                                    </div>
+                                </div>
+                                <div class="recommendation-box">
+                                    <h4>Clinical Recommendation</h4>
+                                    <p id="recommendationText">Low bone density detected. Schedule a DEXA scan for
+                                        confirmatory diagnosis. Consider calcium and vitamin D supplementation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Visualization -->
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <h3 class="result-card-title">AI Visualization</h3>
+                        </div>
+                        <div class="result-card-body">
+                            <div class="viz-tabs">
+                                <button class="viz-tab active" onclick="switchViz('overlay')">Overlay</button>
+                                <button class="viz-tab" onclick="switchViz('heatmap')">Heatmap</button>
+                                <button class="viz-tab" onclick="switchViz('original')">Original</button>
+                            </div>
+                            <div class="viz-content">
+                                <img src="" alt="Analysis" class="viz-image" id="vizImage">
+                                <div class="heatmap-overlay" id="heatmapOverlay"></div>
+                                <div class="viz-legend">
+                                    <span>Low Attention</span>
+                                    <div class="legend-gradient"></div>
+                                    <span>High Attention</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-bar">
+                    <button class="btn btn-secondary" onclick="showPage('upload')">Analyze Another</button>
+                    <button class="btn btn-primary" onclick="downloadReport()">Download Report</button>
+                </div>
+            </section>
+        </div>
+        <!-- Settings Page -->
+        <div class="page" id="settingsPage">
+            <section class="upload-section">
+                <div class="page-header">
+                    <h1 class="page-title">Settings</h1>
+                    <p class="page-subtitle">Manage your account preferences and application configuration.</p>
+                </div>
+                <div class="upload-container">
+                    <div class="card-body" style="padding: 40px;">
+                        <div class="result-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">🌙</div>
+                                <div class="detail-content" style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <h4>Appearance</h4>
+                                        <p>Dark Mode Preference</p>
+                                    </div>
+                                    <button class="btn btn-secondary" onclick="toggleTheme()" style="padding: 8px 16px;">Toggle</button>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">🔔</div>
+                                <div class="detail-content">
+                                    <h4>Notifications</h4>
+                                    <p>Email alerts for completed reports</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">🔒</div>
+                                <div class="detail-content">
+                                    <h4>Privacy</h4>
+                                    <p>Manage data sharing and security</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profilePage">
+            <section class="upload-section">
+                <div class="page-header">
+                    <h1 class="page-title">My Profile</h1>
+                    <p class="page-subtitle">View and update your personal information.</p>
+                </div>
+                <div class="upload-container">
+                    <form id="profileForm" onsubmit="saveProfile(event)" class="card-body" style="padding: 40px;">
+                        <div style="text-align: center; margin-bottom: 32px;">
+                            <div class="profile-photo-upload" onclick="document.getElementById('profilePhotoInput').click()" style="width: 120px; height: 120px; margin: 0 auto 16px; position: relative; cursor: pointer;">
+                                <img id="profilePhotoPreview" src="" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: none; border: 4px solid var(--primary-blue);">
+                                <div id="profilePhotoPlaceholder" class="upload-icon" style="width: 100%; height: 100%; font-size: 48px; border-radius: 50%; margin: 0; display: flex;">👤</div>
+                                <div style="position: absolute; bottom: 0; right: 0; background: var(--primary-blue); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid var(--card-bg);">📷</div>
+                            </div>
+                            <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhoto(event)">
+                            <h2 id="displayUserName" style="margin-bottom: 4px;">John Doe</h2>
+                            <p id="displayUserEmail" style="color: var(--text-muted);">john.doe@example.com</p>
+                        </div>
+                        
+                        <div class="result-details">
+                            <div class="detail-item" style="display: block;">
+                                <label style="display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 8px;">Full Name</label>
+                                <input type="text" id="profileName" class="btn btn-secondary" style="width: 100%; text-align: left; background: var(--gray-50); border: 1px solid var(--border-color); border-radius: var(--radius-sm); height: 48px; padding: 0 16px; font-size: 16px;" placeholder="Your Name" required>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="detail-item" style="display: block;">
+                                    <label style="display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 8px;">Age</label>
+                                    <input type="number" id="profileAge" class="btn btn-secondary" style="width: 100%; text-align: left; background: var(--gray-50); border: 1px solid var(--border-color); border-radius: var(--radius-sm); height: 48px; padding: 0 16px; font-size: 16px;" placeholder="Age" min="1" max="120" required>
+                                </div>
+                                <div class="detail-item" style="display: block;">
+                                    <label style="display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 8px;">Gender</label>
+                                    <select id="profileGender" class="btn btn-secondary" style="width: 100%; text-align: left; background: var(--gray-50); border: 1px solid var(--border-color); border-radius: var(--radius-sm); height: 48px; padding: 0 16px; font-size: 16px;" required>
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                        <option value="Prefer not to say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 32px; display: flex; justify-content: center;">
+                            <button type="submit" class="btn btn-primary" style="padding: 16px 48px;">Save Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
